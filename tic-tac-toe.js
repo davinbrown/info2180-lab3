@@ -9,6 +9,12 @@ window.onload = function() {
         squares[i].setAttribute('id', i); // add index loop as id to squares
     }
 };
+ var slots = [[0,1,2], [3,4,5], [6,7,8],
+ [0,3,6], [1,4,7], [2,5,8],
+ [0,4,8], [2,4,6]];
+
+
+//
 
 // When a square is clicked add X or O to it
 var prevMove = null;
@@ -34,7 +40,8 @@ function  makeMove(e) {
             }
         }
     }
-   
+    // after each move check for a winner
+    winner()
 }
 
 // add hover effect to squares
@@ -44,4 +51,27 @@ function squareHover(e) {
 function squareExit(e) {
     e.target.classList.remove("hover");
 }
-// when new game button is clicked clear the squares and start new game
+
+// check when either X or O has won and update status
+function winner() {
+    var squares = document.getElementById("board").children;
+    for ( i=0; i<slots.length; i++ ) {
+
+        if (squares[slots[i][0]].innerHTML != "" || squares[slots[i][1]].innerHTML != "" || squares[slots[i][2]].innerHTML != "" ) {
+            if ( squares[slots[i][0]].innerHTML  == squares[slots[i][1]].innerHTML && squares[slots[i][1]].innerHTML == squares[slots[i][2]].innerHTML ) {
+                whoWon(squares[slots[i][0]].innerHTML);
+            }
+        }
+    }
+}
+
+// Check for the winner and update the status
+function whoWon(player){
+    var status = document.getElementById("status");
+    if (player == "X") {
+        status.innerHTML = "Congratulations! 'X' is the Winner!";
+    }
+    else if(player == "O"){
+        status.innerHTML = "Congratulations! 'O' is the Winner!";
+    }
+}
