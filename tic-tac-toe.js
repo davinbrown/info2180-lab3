@@ -8,13 +8,12 @@ window.onload = function() {
         squares[i].addEventListener("mouseout", squareExit, false);  
         squares[i].setAttribute('id', i); // add index loop as id to squares
     }
+    // click event for new game button
+    document.querySelector("button").addEventListener("click", restartGame);
 };
  var slots = [[0,1,2], [3,4,5], [6,7,8],
  [0,3,6], [1,4,7], [2,5,8],
  [0,4,8], [2,4,6]];
-
-
-//
 
 // When a square is clicked add X or O to it
 var prevMove = null;
@@ -74,4 +73,17 @@ function whoWon(player){
     else if(player == "O"){
         status.innerHTML = "Congratulations! 'O' is the Winner!";
     }
+}
+
+// Restart the game
+function restartGame() {
+    var status = document.getElementById("status");
+    var squares = document.getElementById("board").children;
+    for (i = 0; i <= squares.length - 1; i++) {
+        squares[i].classList.remove("X"); // remove X class square
+        squares[i].classList.remove("O"); // remove O class square
+        squares[i].innerHTML = ""; // remove played X and O 
+    }
+    status.innerHTML = "Move your mouse over a square and click to play an X or an O.";
+    prevMove = null;
 }
