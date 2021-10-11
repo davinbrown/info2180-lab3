@@ -18,7 +18,7 @@ window.onload = function() {
 // When a square is clicked add X or O to it
 var prevMove = null;
 function  makeMove(e) {
-    // Check if the square is empty
+    // Check if the square is empty to Disallow Cheating 
     if (e.target.innerHTML == "") {
         // first move of the game
         if (prevMove == null) {
